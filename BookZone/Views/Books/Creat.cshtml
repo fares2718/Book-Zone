@@ -1,1 +1,37 @@
-﻿<p>Creat Game</p>
+﻿@model CreatBookViewModel
+
+@{
+	ViewData["Title"] = "Add Book";
+}
+
+<h5>
+	<i class="bi bi-plus-circle-dotted"></i>
+	Add a new book
+</h5>
+
+<form asp-controller="Books">
+	<div class="row">
+		<div class="col-md-6">
+			<div>
+				<label asp-for="Name" class="form-label mt-4"></label>
+				<input type="text" class="form-control" asp-for="Name" placeholder="Enter name">
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+			<div>
+				<label asp-for="AuthorName" class="form-label mt-4"></label>
+				<input type="text" class="form-control" asp-for="AuthorName" placeholder="Enter author name">
+				<span asp-validation-for="AuthorName" class="text-danger"></span>
+			</div>
+			<div>
+				<label asp-for="CategoryId" class="form-label mt-4"></label>
+				<select class="form-select" asp-for="CategoryId" asp-items="Model.Categories">
+					<option></option>
+				</select>
+				<span asp-validation-for="CategoryId" class="text-danger"></span>
+				<button type="submit" class="btn btn-light text-black mt-4">Save</button>
+			</div>
+		</div>
+		<div class="col-md-6"></div>
+	</div>
+</form>
+

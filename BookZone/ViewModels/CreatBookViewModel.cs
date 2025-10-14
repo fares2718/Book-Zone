@@ -7,7 +7,10 @@ namespace BookZone.ViewModels
     {
         [MaxLength(250)]
         public string Name { get; set; } = string.Empty;
-        public int AuthorId { get; set; }
+        [MaxLength(250)]
+        [Display(Name = "Autor")]
+        public string AuthorName { get; set; } = string.Empty ;
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
         public IEnumerable<SelectListItem> Categories = Enumerable.Empty<SelectListItem>();
         public List<int> SelectedLanguages { get; set; } = new List<int>();

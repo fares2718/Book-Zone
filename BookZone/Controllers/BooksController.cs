@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BookZone.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookZone.Controllers
 {
@@ -12,7 +13,11 @@ namespace BookZone.Controllers
         [HttpGet]
         public IActionResult Creat()
         {
-            return View();
+            CreatBookViewModel viewModel = new CreatBookViewModel
+            {
+
+            };
+            return View(viewModel);
         }
     }
 }
