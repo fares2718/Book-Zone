@@ -35,5 +35,12 @@ namespace BookZone.Controllers
             };
             return View(viewModel);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Creat(CreatBookViewModel model)
+        {
+            return View();
+        }
     }
 }
