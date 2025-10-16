@@ -1,4 +1,5 @@
 ﻿using BookZone.Data;
+using BookZone.Models;
 using BookZone.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -40,7 +41,19 @@ namespace BookZone.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Creat(CreatBookViewModel model)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                model.Categories = _context.Categories
+                        .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name })
+                        .OrderBy(c => c.Text)
+                        .ToList();
+                model.Languages = _context.Languges
+                        .Select(l => new SelectListItem { Value = l.Id.ToString(), Text = l.Name })
+                        .OrderBy(l => l.Text)
+                        .ToList();
+                return View(model);
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }
