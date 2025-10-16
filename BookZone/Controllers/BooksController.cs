@@ -1,5 +1,6 @@
 ﻿using BookZone.Data;
 using BookZone.Models;
+using BookZone.Servieces;
 using BookZone.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,11 +9,13 @@ namespace BookZone.Controllers
 {
     public class BooksController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly CategoriesServices _categoriesServices;
+        private readonly LanguagesServices _languagesServices;
 
-        public BooksController(ApplicationDbContext context)
+        public BooksController(CategoriesServices categoriesServices, LanguagesServices languagesServices)
         {
-            _context = context;
+            _categoriesServices = categoriesServices;
+            _languagesServices = languagesServices;
         }
 
         public IActionResult Index()
@@ -25,14 +28,8 @@ namespace BookZone.Controllers
         {
             CreatBookViewModel viewModel = new()
             {
-                Categories = _context.Categories
-                        .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name })
-                        .OrderBy(c => c.Text)
-                        .ToList(),
-                Languages = _context.Languges
-                        .Select(l => new SelectListItem { Value = l.Id.ToString(), Text = l.Name })
-                        .OrderBy(l => l.Text)
-                        .ToList()
+                Categories = _categoriesServices.GetCategories(),
+                Languages = _languagesServices.GetLanguages()
             };
             return View(viewModel);
         }
@@ -43,14 +40,8 @@ namespace BookZone.Controllers
         {
             if (!ModelState.IsValid)
             {
-                model.Categories = _context.Categories
-                        .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name })
-                        .OrderBy(c => c.Text)
-                        .ToList();
-                model.Languages = _context.Languges
-                        .Select(l => new SelectListItem { Value = l.Id.ToString(), Text = l.Name })
-                        .OrderBy(l => l.Text)
-                        .ToList();
+                model.Categories = _categoriesServices.GetCategories();
+                model.Languages = _languagesServices.GetLanguages();
                 return View(model);
             }
             return RedirectToAction(nameof(Index));
