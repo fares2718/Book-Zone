@@ -1,5 +1,6 @@
 ﻿using BookZone.Data;
 using BookZone.Models;
+using BookZone.Settings;
 using BookZone.ViewModels;
 
 namespace BookZone.Services
@@ -17,7 +18,7 @@ namespace BookZone.Services
             _context = context;
             _authorServices = authorServices;
             _webHostEnvironment = webHostEnvironment;
-            _imagesPath = $"{_webHostEnvironment.WebRootPath}/assets/images";
+            _imagesPath = $"{_webHostEnvironment.WebRootPath}{FileSettings.ImagesPath}";
         }
 
         public async Task AddNewBook(CreatBookViewModel book)
@@ -26,7 +27,6 @@ namespace BookZone.Services
             var path = Path.Combine(_imagesPath, coverName) ;
             using var stream = File.Create(path) ;
             await book.Cover.CopyToAsync(stream) ;
-            stream.Dispose();
             int authorId = _authorServices.GetAuthor(book.AuthorName).Id;
             Book newBook = new()
             {
