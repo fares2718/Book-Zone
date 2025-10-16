@@ -1,7 +1,8 @@
 ﻿using BookZone.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
-namespace BookZone.Servieces
+namespace BookZone.Services
 {
     public class LanguagesServices : ILanguagesServices
     {
@@ -15,6 +16,7 @@ namespace BookZone.Servieces
             return _context.Languges
                         .Select(l => new SelectListItem { Value = l.Id.ToString(), Text = l.Name })
                         .OrderBy(l => l.Text)
+                        .AsNoTracking()
                         .ToList();
         }
     }

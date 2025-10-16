@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace BookZone.Servieces
+namespace BookZone.Services
 {
     public interface ILanguagesServices
     {

@@ -1,4 +1,5 @@
 using BookZone.Data;
+using BookZone.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(ConnectionString));
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<ICategoriesServices, CategoriesServices>();
+builder.Services.AddScoped<ILanguagesServices, LanguagesServices>();
+builder.Services.AddScoped<IAuthorServices, AuthorServices>();
+builder.Services.AddScoped<IBookServices, BookServices>();
 
 var app = builder.Build();
 

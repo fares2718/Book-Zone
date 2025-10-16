@@ -1,6 +1,6 @@
 ﻿using BookZone.Data;
 using BookZone.Models;
-using BookZone.Servieces;
+using BookZone.Services;
 using BookZone.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,13 +9,15 @@ namespace BookZone.Controllers
 {
     public class BooksController : Controller
     {
-        private readonly CategoriesServices _categoriesServices;
-        private readonly LanguagesServices _languagesServices;
+        private readonly ICategoriesServices _categoriesServices;
+        private readonly ILanguagesServices _languagesServices;
+        private readonly IAuthorServices _authorServices;
 
-        public BooksController(CategoriesServices categoriesServices, LanguagesServices languagesServices)
+        public BooksController(ICategoriesServices categoriesServices, ILanguagesServices languagesServices, IAuthorServices authorServices)
         {
             _categoriesServices = categoriesServices;
             _languagesServices = languagesServices;
+            _authorServices = authorServices;
         }
 
         public IActionResult Index()

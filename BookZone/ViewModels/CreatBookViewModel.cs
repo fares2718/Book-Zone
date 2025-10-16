@@ -8,7 +8,7 @@ namespace BookZone.ViewModels
         [MaxLength(250)]
         public string Name { get; set; } = string.Empty;
         [MaxLength(250)]
-        [Display(Name = "Autor")]
+        [Display(Name = "Author")]
         public string AuthorName { get; set; } = string.Empty ;
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
