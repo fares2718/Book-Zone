@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using BookZone.Attributes;
+using BookZone.Settings;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace BookZone.ViewModels
@@ -18,6 +20,7 @@ namespace BookZone.ViewModels
         public IEnumerable<SelectListItem> Languages = Enumerable.Empty<SelectListItem>();
         [MaxLength(2500)]
         public string Description { get; set; } = string.Empty;
+        [AllowedExtentions(FileSettings.AllowedExtentions)]
         public IFormFile Cover { get; set; } = default!;
     }
 }
