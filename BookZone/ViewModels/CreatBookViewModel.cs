@@ -13,6 +13,7 @@ namespace BookZone.ViewModels
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
         public IEnumerable<SelectListItem> Categories = Enumerable.Empty<SelectListItem>();
+        [Display(Name ="Supported Languages")]
         public List<int> SelectedLanguages { get; set; } = new List<int>();
         public IEnumerable<SelectListItem> Languages = Enumerable.Empty<SelectListItem>();
         [MaxLength(2500)]

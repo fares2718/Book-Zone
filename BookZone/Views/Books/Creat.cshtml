@@ -28,8 +28,25 @@
 					<option></option>
 				</select>
 				<span asp-validation-for="CategoryId" class="text-danger"></span>
-				<button type="submit" class="btn btn-light text-black mt-4">Save</button>
 			</div>
+			<div>
+				<label asp-for="SelectedLanguages" class="form-label mt-4"></label>
+				<select class="form-select" asp-for="SelectedLanguages" asp-items="Model.Languages">
+					<option></option>
+				</select>
+				<span asp-validation-for="SelectedLanguages" class="text-danger"></span>
+			</div>
+			<div>
+				<label asp-for="Description" class="form-label mt-4"></label>
+				<textarea class="form-control" asp-for="Description" placeholder="Description"></textarea>
+				<span asp-validation-for="Description" class="text-danger"></span>
+			</div>
+			<div>
+				<label asp-for="Cover" class="form-label mt-4"></label>
+				<input class="form-control" type="file" asp-for="Cover">
+				<span asp-validation-for="Cover" class="text-danger"></span>
+			</div>
+			<button type="submit" class="btn btn-light text-black mt-4">Save</button>
 		</div>
 		<div class="col-md-6"></div>
 	</div>
