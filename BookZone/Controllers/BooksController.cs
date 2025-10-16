@@ -12,12 +12,15 @@ namespace BookZone.Controllers
         private readonly ICategoriesServices _categoriesServices;
         private readonly ILanguagesServices _languagesServices;
         private readonly IAuthorServices _authorServices;
+        private readonly IBookServices _bookServices;
 
-        public BooksController(ICategoriesServices categoriesServices, ILanguagesServices languagesServices, IAuthorServices authorServices)
+        public BooksController(ICategoriesServices categoriesServices, ILanguagesServices languagesServices,
+            IAuthorServices authorServices, IBookServices bookServices)
         {
             _categoriesServices = categoriesServices;
             _languagesServices = languagesServices;
             _authorServices = authorServices;
+            _bookServices = bookServices;
         }
 
         public IActionResult Index()
@@ -38,7 +41,7 @@ namespace BookZone.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Creat(CreatBookViewModel model)
+        public async Task<IActionResult> Creat(CreatBookViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -46,6 +49,7 @@ namespace BookZone.Controllers
                 model.Languages = _languagesServices.GetLanguages();
                 return View(model);
             }
+            await _bookServices.AddNewBook(model);
             return RedirectToAction(nameof(Index));
         }
     }

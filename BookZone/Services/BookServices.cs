@@ -20,18 +20,22 @@ namespace BookZone.Services
             _imagesPath = $"{_webHostEnvironment.WebRootPath}/assets/images";
         }
 
-        public void AddNewBook(CreatBookViewModel book)
+        public async Task AddNewBook(CreatBookViewModel book)
         {
             string coverName = $"{Guid.NewGuid()}{Path.GetExtension(book.Cover.FileName)}";
             var path = Path.Combine(_imagesPath, coverName) ;
+            using var stream = File.Create(path) ;
+            await book.Cover.CopyToAsync(stream) ;
+            stream.Dispose();
             int authorId = _authorServices.GetAuthor(book.AuthorName).Id;
-            var newBook = new Book
+            Book newBook = new()
             {
                 Name = book.Name,
                 CategoryId = book.CategoryId,
                 Cover = coverName,
                 Description = book.Description,
-                AuthorId= authorId,
+                AuthorId = authorId,
+                languges = book.SelectedLanguages.Select(l => new BookLanguge { LangugeId = l }).ToList()
             };
             _context.Books.Add(newBook);
             _context.SaveChanges();
