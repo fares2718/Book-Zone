@@ -21,6 +21,7 @@ namespace BookZone.ViewModels
         [MaxLength(2500)]
         public string Description { get; set; } = string.Empty;
         [AllowedExtentions(FileSettings.AllowedExtentions)]
+        [MaxFileSize(FileSettings.MaxSizeinB)]
         public IFormFile Cover { get; set; } = default!;
     }
 }
