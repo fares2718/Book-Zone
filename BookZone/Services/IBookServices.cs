@@ -5,6 +5,7 @@ namespace BookZone.Services
 {
     public interface IBookServices
     {
-        public Task AddNewBook(CreatBookViewModel book);
+        Task<IEnumerable<Book>> GetAll();
+        Task AddNewBook(CreatBookViewModel book);
     }
 }

@@ -25,14 +25,16 @@
 			</div>
 			<div>
 				<label asp-for="CategoryId" class="form-label mt-4"></label>
-				<select class="form-select" asp-for="CategoryId" asp-items="Model.Categories">
+				<select class="form-select" asp-for="CategoryId" asp-items="Model.Categories"
+				data-placeholder="Select a category" data-minimum-result-for-search="Infinity">
 					<option value=""></option>
 				</select>
 				<span asp-validation-for="CategoryId" class="text-danger"></span>
 			</div>
 			<div>
 				<label asp-for="SelectedLanguages" class="form-label mt-4"></label>
-				<select multiple="" class="form-select" asp-for="SelectedLanguages" asp-items="Model.Languages">
+				<select multiple="" class="form-select" asp-for="SelectedLanguages" asp-items="Model.Languages"
+				data-placeholder="Select a category" data-minimum-result-for-search="Infinity">
 					<option></option>
 				</select>
 				<span asp-validation-for="SelectedLanguages" class="text-danger"></span>
@@ -63,17 +65,8 @@
 
 
 @section Scripts{
-	<partial name="_ValidationScriptsPartial"/>
-	<script>
-		$.validator.addMethod("filesize",function(value,element,parameter){
-			return this.optional(element) || element.files[0].size <= parameter;
-		});
-		$(document).ready(function(){
-			$('#Cover').on('change',function(){
-				$('.cover-preview').attr('src',window.URL.createObjectURL(this.files[0]))
-				.removeClass('d-none');
-			})
-		});
-	</script>
+	<partial name="_ValidationScriptsPartial" />
+	<script src="~/js/file-size-validator.js" asp-append-version="true"></script>
+	<script src="~/js/book-form.js" asp-append-version="true"></script>
 }
 

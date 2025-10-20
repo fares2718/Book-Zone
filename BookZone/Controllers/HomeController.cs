@@ -1,14 +1,23 @@
 using System.Diagnostics;
 using BookZone.Models;
+using BookZone.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookZone.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IBookServices _services;
+
+        public HomeController(IBookServices services)
         {
-            return View();
+            _services = services;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var book = await _services.GetAll();
+            return View(book);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

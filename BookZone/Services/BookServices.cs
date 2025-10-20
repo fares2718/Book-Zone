@@ -2,6 +2,7 @@
 using BookZone.Models;
 using BookZone.Settings;
 using BookZone.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookZone.Services
 {
@@ -39,6 +40,13 @@ namespace BookZone.Services
             };
             _context.Books.Add(newBook);
             _context.SaveChanges();
+        }
+
+        public async Task<IEnumerable<Book>> GetAll()
+        {
+            return await _context.Books
+                .AsNoTracking()
+                .ToListAsync();
         }
     }
 }
