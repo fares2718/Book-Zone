@@ -29,6 +29,14 @@ namespace BookZone.Controllers
             return View(books);
         }
 
+        public async Task<IActionResult> Details(int Id)
+        {
+            var book = await _bookServices.GetBookById(Id);
+            if(book is null)
+                return NotFound("Book Was Not Found");
+            return View(book);
+        }
+
         [HttpGet]
         public IActionResult Creat()
         {

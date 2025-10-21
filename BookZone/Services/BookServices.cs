@@ -55,5 +55,15 @@ namespace BookZone.Services
                 .AsNoTracking()
                 .ToListAsync();
         }
+
+        public async Task<Book?> GetBookById(int Id)
+        {
+            return await _context.Books
+                .Include(b => b.Category)
+                .Include(b => b.languges)
+                .ThenInclude(l => l.Languge)
+                .AsNoTracking()
+                .SingleOrDefaultAsync(b => b.Id == Id);
+        }
     }
 }

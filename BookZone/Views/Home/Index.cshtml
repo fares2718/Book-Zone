@@ -18,8 +18,8 @@ else
         @foreach(var book in Model)
         {
             <div class="col-lg-4 col-md-6">
-                <div class="card border-success mb-3" style="max-width: 20rem;">
-                    <div class="card-body" style="background-image:url(@($"{FileSettings.ImagesPath}/{book.Cover}")); background-size:cover;background-position:center; height:400px;">
+                <a class="card border-success mb-3 text-decoration-none" asp-controller="Books" asp-action="Details" asp-route-Id="@book.Id">
+                    <div class="card-body" style="background-image:url(@($"{FileSettings.ImagesPath}/{book.Cover}")); background-size:cover;background-position:center; height:500px;">
                         <div class="h-100 d-flex align-items-end">
                             <span class="badge bg-secondary rounded-0 fs-3">@book.Category?.Name</span>
                         </div>
@@ -33,7 +33,7 @@ else
                             }
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         }
     </div>
