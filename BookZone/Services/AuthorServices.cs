@@ -11,6 +11,14 @@ namespace BookZone.Services
         {
             _context = context;
         }
+
+        public async Task AddNew(string name)
+        {
+            await _context.Authors.AddAsync(new Author { Name = name });
+            await _context.SaveChangesAsync();
+
+        }
+
         public Author GetAuthor(string name)
         {
             var author = _context.Authors.FirstOrDefault(a => a.Name == name);

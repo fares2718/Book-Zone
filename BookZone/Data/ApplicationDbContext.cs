@@ -37,7 +37,16 @@ namespace BookZone.Data
                 });
             modelBuilder.Entity<BookLanguge>()
                 .HasKey(e => new { e.LangugeId, e.BookId });
+            modelBuilder.Entity<BookLanguge>()
+                .HasOne(bl => bl.Book)
+                .WithMany(b => b.languges)
+                .HasForeignKey(bl => bl.BookId);
+            modelBuilder.Entity<BookLanguge>()
+                .HasOne(bl => bl.Languge)
+                .WithMany(l => l.books)
+                .HasForeignKey(bl => bl.LangugeId);
             base.OnModelCreating(modelBuilder);
+            
         }
     }
 }

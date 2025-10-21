@@ -17,8 +17,8 @@ namespace BookZone.Attributes
             var file = value as IFormFile;
             if (file is not null)
             {
-                if (file.Length < _maxSize)
-                    return new ValidationResult($"Maximum allowed size is {_maxSize} bytes");
+                if (file.Length > _maxSize)
+                    return new ValidationResult($"Maximum allowed size is {_maxSize/(1024*1024)} MB");
             }
             return ValidationResult.Success;
         }

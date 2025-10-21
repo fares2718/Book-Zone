@@ -13,6 +13,7 @@ namespace BookZone.Models
 
         public int CategoryId { get; set; }
         public Category Category { get; set; } = default!;
-        public ICollection<BookLanguge> languges = new List<BookLanguge>();
+        public ICollection<BookLanguge> languges
+            = new List<BookLanguge>();
     }
 }

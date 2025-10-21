@@ -28,6 +28,10 @@ namespace BookZone.Services
             var path = Path.Combine(_imagesPath, coverName) ;
             using var stream = File.Create(path) ;
             await book.Cover.CopyToAsync(stream) ;
+            if (_authorServices.GetAuthor(book.AuthorName) == null)
+            {
+                await _authorServices.AddNew(book.AuthorName);
+            }
             int authorId = _authorServices.GetAuthor(book.AuthorName).Id;
             Book newBook = new()
             {
@@ -45,6 +49,9 @@ namespace BookZone.Services
         public async Task<IEnumerable<Book>> GetAll()
         {
             return await _context.Books
+                .Include(b => b.Category)
+                .Include(b => b.languges)
+                .ThenInclude(l => l.Languge)
                 .AsNoTracking()
                 .ToListAsync();
         }
