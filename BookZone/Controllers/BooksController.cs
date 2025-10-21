@@ -23,9 +23,10 @@ namespace BookZone.Controllers
             _bookServices = bookServices;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+           var books = await  _bookServices.GetAll();
+            return View(books);
         }
 
         [HttpGet]
